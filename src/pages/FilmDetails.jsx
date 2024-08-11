@@ -4,8 +4,12 @@ import { getMovieDetails } from "../apis/movieDetailsApi";
 import { getMovieTrailers } from "../apis/movieTrailersApi";
 import { getMovieVideos } from "../apis/movieVideos";
 import { getSimilarMovies } from "../apis/similarApi";
-import FilmCard from "../components/FilmCard";
 import { getRecommandedMovies } from "../apis/recommendationApi";
+import DetailsHero from "../sections/DetailsHero";
+import Trailers from "../sections/Trailers";
+import Videos from "../sections/Videos";
+import Similar from "../sections/Similar";
+import Recommendations from "../sections/Recommendations";
 
 const FilmDetails = () => {
   const [isMoviesLoading, setIsMoviesLoading] = useState(true);
@@ -60,7 +64,7 @@ const FilmDetails = () => {
     loadMovieVideosApi();
     loadSimilarMoviesApi();
     loadRecommandedMoviesApi();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     async function loadMovieTrailers() {
@@ -89,112 +93,20 @@ const FilmDetails = () => {
 
   return (
     <div className="p-24">
-      <img
-        className="w-[80vw] absolute left-0 right-0 -top-[100%] translateAbs mx-auto pointer-events-none blur-[300px] -z-10"
-        draggable={false}
-        src={`https://image.tmdb.org/t/p/original/${details.poster_path}`}
-        alt=""
-      />
+      <DetailsHero details={details} />
 
-      <div className="p-20">
-        <div className="flex gap-x-7">
-          <div>
-            <img
-              src={`https://image.tmdb.org/t/p/original/${details.poster_path}`}
-              className="w-[250px] rounded-md object-contain"
-            />
-          </div>
+      <div className="flex flex-col gap-y-14 mt-14">
+        <Trailers
+          trailers={trailers}
+          isTrailersLoading={isTrailersLoading}
+          isTrailersError={isTrailersError}
+        />
 
-          <div className="flex flex-col gap-y-10">
-            <h1 className="font-bold text-3xl w-[400px]">{details.title}</h1>
-            <div className="flex gap-x-2">
-              {details.genres.map((genre) => (
-                <div
-                  className="bg-[#a3a3a3] bg-opacity-30 rounded p-2 text-sm"
-                  key={genre.id}
-                >
-                  {genre.name}
-                </div>
-              ))}
-            </div>
-            <div className="grid grid-rows-[repeat(3,_60px)_1fr] grid-cols-[130px_1fr] w-[700px] min-h-[300px]">
-              <p className="font-medium">Release Date</p>
-              <p>{details.release_date}</p>
-              <p className="font-medium">Language</p>
-              <p>{details.original_language.toUpperCase()}</p>
-              <p className="font-medium">Status</p>
-              <p>{details.status}</p>
-              <p className="font-medium">Overview</p>
-              <p>{details.overview}</p>
-            </div>
-          </div>
-        </div>
+        <Videos videos={videos} isVideosLoading={isVideosLoading} />
 
-        <div className="flex flex-col gap-y-14 mt-14">
-          <div className="flex flex-col gap-y-8">
-            <h2 className=" font-semibold text-3xl tracking-wide">Trailers</h2>
-            <div className="flex overflow-x-auto gap-x-5 ml-8">
-              {isTrailersLoading ? (
-                <div>Loading...</div>
-              ) : isTrailersError ? (
-                <div>Failed to Fetch the Trailers</div>
-              ) : (
-                trailers.map((trailer) => (
-                  <iframe
-                    className="aspect-video h-[250px]"
-                    key={trailer.id.videoId}
-                    src={`https://www.youtube.com/embed/${trailer.id.videoId}`}
-                    title="Deadpool &amp; Wolverine - Official Teaser Trailer (2024) Hugh Jackman, Ryan Reynolds"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  />
-                ))
-              )}
-            </div>
-          </div>
+        <Similar similarMovies={similarMovies} />
 
-          <div className="flex flex-col gap-y-8">
-            <h2 className=" font-semibold text-3xl tracking-wide">Videos</h2>
-            <div className="flex overflow-x-auto gap-x-5 ml-8">
-              {isVideosLoading ? (
-                <div>Loading...</div>
-              ) : videos.length ? (
-                videos.map((video) => (
-                  <iframe
-                    className="aspect-video h-[250px]"
-                    key={video.key}
-                    src={`https://www.youtube.com/embed/${video.key}`}
-                    title="Deadpool &amp; Wolverine - Official Teaser Trailer (2024) Hugh Jackman, Ryan Reynolds"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  />
-                ))
-              ) : (
-                <div>None Were Found</div>
-              )}
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-y-8">
-            <h2 className=" font-semibold text-3xl tracking-wide">Similar</h2>
-            <div className="flex overflow-x-auto gap-x-5 ml-8">
-              {similarMovies.map((movie) => (
-                <FilmCard movie={movie} key={movie.id} />
-              ))}
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-y-8">
-            <h2 className=" font-semibold text-3xl tracking-wide">
-              Recommedations
-            </h2>
-            <div className="flex overflow-x-auto gap-x-5 ml-8">
-              {recommandedMovies.map((movie) => (
-                <FilmCard movie={movie} key={movie.id} />
-              ))}
-            </div>
-          </div>
-        </div>
+        <Recommendations recommandedMovies={recommandedMovies} />
       </div>
     </div>
   );

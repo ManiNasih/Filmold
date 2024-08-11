@@ -1,5 +1,5 @@
 import FilmCard from "../components/FilmCard";
-import Hero from "../components/Hero";
+import Hero from "../sections/Hero";
 
 export default function Home({ trendingMovies, movies }) {
   return (
@@ -16,7 +16,7 @@ export default function Home({ trendingMovies, movies }) {
         {movies.length > 0 ? (
           movies.map((movie) => <FilmCard movie={movie} key={movie.id} />)
         ) : (
-          <div>hello</div>
+          <div>Loading...</div>
         )}
       </div>
     </div>

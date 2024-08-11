@@ -92,7 +92,7 @@ export default function App() {
           index
           element={<Home trendingMovies={trendingMovies} movies={movies} />}
         />
-        <Route path=":id" element={<FilmDetails />} />
+        <Route path="details/:id" element={<FilmDetails />} />
       </Route>
     </Routes>
   );
