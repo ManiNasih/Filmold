@@ -1,7 +1,7 @@
 export async function getMovieTrailers(name) {
   const apiTrailersURL = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
     `${name} Official Trailer`
-  )}&key=AIzaSyBxRAGg-7Y_Iaz5Idjzf8hqv73LWzpE0Rs&type=video`;
+  )}&key=${import.meta.env.VITE_YOUTUBE_API_KEY}&type=video`;
 
   const res = await fetch(apiTrailersURL);
   if (!res.ok) {
