@@ -3,7 +3,7 @@ import Hero from "../sections/Hero";
 
 export default function Home({ trendingMovies, movies }) {
   return (
-    <div className="w-screen h-screen p-20">
+    <div className="w-screen h-screen p-20 sm:px-6">
       {trendingMovies.length > 0 ? (
         <Hero movie={trendingMovies[0]} />
       ) : (
