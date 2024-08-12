@@ -92,7 +92,7 @@ const FilmDetails = () => {
   }
 
   return (
-    <div className="p-24">
+    <div className="px-36 py-24 xl:px-16 md:px-10 sm:px-6">
       <DetailsHero details={details} />
 
       <div className="flex flex-col gap-y-14 mt-14">

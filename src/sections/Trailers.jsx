@@ -10,10 +10,9 @@ const Trailers = ({ trailers, isTrailersLoading, isTrailersError }) => {
         ) : (
           trailers.map((trailer) => (
             <iframe
-              className="aspect-video h-[250px]"
+              className="aspect-video h-[250px] sm:h-[150px]"
               key={trailer.id.videoId}
               src={`https://www.youtube.com/embed/${trailer.id.videoId}`}
-              title="Deadpool &amp; Wolverine - Official Teaser Trailer (2024) Hugh Jackman, Ryan Reynolds"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />

@@ -2,43 +2,50 @@ const DetailsHero = ({ details }) => {
   return (
     <>
       <img
-        className="w-[80vw] absolute left-0 right-0 -top-[100%] translateAbs mx-auto pointer-events-none blur-[300px] -z-10"
+        className="w-[80vw] absolute left-0 right-0 -top-[100%] translateAbs mx-auto pointer-events-none blur-[300px] -z-10 lg:w-screen lg:-top-[50%] sm:top-0"
         draggable={false}
         src={`https://image.tmdb.org/t/p/original/${details.poster_path}`}
         alt=""
       />
 
-      <div className="p-20">
-        <div className="flex gap-x-7">
-          <div>
-            <img
-              src={`https://image.tmdb.org/t/p/original/${details.poster_path}`}
-              className="w-[250px] rounded-md object-contain"
-            />
+      <div className="flex gap-x-7 w-full pt-20 lg:flex-col lg:items-start lg:gap-y-10 lg:pt-5 sm:pt-2">
+        <div className="w-[250px] flex shrink-0 items-start justify-start lg:w-full">
+          <img
+            src={`https://image.tmdb.org/t/p/original/${details.poster_path}`}
+            className="w-full rounded-md object-contain lg:hidden"
+          />
+          <img
+            src={`https://image.tmdb.org/t/p/original/${details.backdrop_path}`}
+            className="w-full rounded-md object-contain hidden lg:block"
+          />
+        </div>
+
+        <div className="flex flex-col shrink">
+          <h1 className="font-bold text-3xl max-w-[400px] mb-10">
+            {details.title}
+          </h1>
+          <div className="flex gap-x-2 flex-wrap mb-10">
+            {details.genres.map((genre) => (
+              <div
+                className="bg-[#a3a3a3] bg-opacity-30 rounded p-2 text-sm"
+                key={genre.id}
+              >
+                {genre.name}
+              </div>
+            ))}
+          </div>
+          <div className="grid grid-rows-[repeat(3,_60px)] grid-cols-[130px_1fr] max-w-[700px]">
+            <p className="font-medium">Release Date</p>
+            <p>{details.release_date}</p>
+            <p className="font-medium">Language</p>
+            <p>{details.original_language.toUpperCase()}</p>
+            <p className="font-medium">Status</p>
+            <p>{details.status}</p>
           </div>
 
-          <div className="flex flex-col gap-y-10">
-            <h1 className="font-bold text-3xl w-[400px]">{details.title}</h1>
-            <div className="flex gap-x-2">
-              {details.genres.map((genre) => (
-                <div
-                  className="bg-[#a3a3a3] bg-opacity-30 rounded p-2 text-sm"
-                  key={genre.id}
-                >
-                  {genre.name}
-                </div>
-              ))}
-            </div>
-            <div className="grid grid-rows-[repeat(3,_60px)_1fr] grid-cols-[130px_1fr] w-[700px] min-h-[300px]">
-              <p className="font-medium">Release Date</p>
-              <p>{details.release_date}</p>
-              <p className="font-medium">Language</p>
-              <p>{details.original_language.toUpperCase()}</p>
-              <p className="font-medium">Status</p>
-              <p>{details.status}</p>
-              <p className="font-medium">Overview</p>
-              <p>{details.overview}</p>
-            </div>
+          <div className="grid grid-rows-1 grid-cols-[130px_1fr] max-w-[700px] sm:grid-cols-none sm:grid-rows-[70px_1fr] sm:place-items-center">
+            <p className="font-medium">Overview</p>
+            <p>{details.overview}</p>
           </div>
         </div>
       </div>
