@@ -6,7 +6,7 @@ const options = {
   },
 };
 
-export async function getMovieVideos(id) {
+export async function fetchMovieVideos(id) {
   const apiVideosUrl = `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`;
 
   const res = await fetch(apiVideosUrl, options);

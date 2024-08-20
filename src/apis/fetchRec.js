@@ -6,7 +6,7 @@ const options = {
   },
 };
 
-export async function getRecommandedMovies(id) {
+export async function fetchRec(id) {
   const apiRecommandedMoviesUrl = `https://api.themoviedb.org/3/movie/${id}/recommendations?language=en-US&page=1`;
 
   const res = await fetch(apiRecommandedMoviesUrl, options);

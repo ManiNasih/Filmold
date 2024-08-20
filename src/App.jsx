@@ -7,31 +7,11 @@ import Home from "./pages/Home";
 import { useSearchParams } from "react-router-dom";
 import FilmDetails from "./pages/FilmDetails";
 
-const options = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization: import.meta.env.VITE_TMDB_AUTH,
-  },
-};
-
 export default function App() {
-  const [trendingMovies, setTrendingMovies] = useState([]);
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState([]);
   // eslint-disable-next-line no-unused-vars, no-undef
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const getTrendingMovies = async () => {
-    const trendingMoviesApiURL = `https://api.themoviedb.org/3/trending/movie/day?language=en-US`;
-    try {
-      const response = await fetch(trendingMoviesApiURL, options);
-      const data = await response.json();
-      setTrendingMovies(data.results);
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   async function getMoviesApi() {
     const data = await getMovies();
@@ -44,8 +24,6 @@ export default function App() {
   }
 
   useEffect(() => {
-    getTrendingMovies();
-
     if (searchParams.get("q")) getSearchedMovies();
     else getMoviesApi();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -66,7 +44,7 @@ export default function App() {
 
   function handleSearchTermParams(key, value) {
     setSearchParams((prevParams) => {
-      if (value === null) {
+      if (value === null || value === "") {
         prevParams.delete(key);
       } else {
         prevParams.set(key, value);
@@ -87,10 +65,7 @@ export default function App() {
           </headerContext.Provider>
         }
       >
-        <Route
-          index
-          element={<Home trendingMovies={trendingMovies} movies={movies} />}
-        />
+        <Route index element={<Home movies={movies} />} />
         <Route path="details/:id" element={<FilmDetails />} />
       </Route>
     </Routes>

@@ -3,17 +3,17 @@ import { Link } from "react-router-dom";
 
 const FilmCard = ({ movie }) => {
   return (
-    <Link to={`/details/${movie.id.toString()}`} reloadDocument>
+    <Link to={`/details/${movie.id.toString()}`} reloadDocument key={movie.id}>
       <div className="bg-primary-900 w-[219px] h-[328px] m-6 overflow-hidden border-none rounded-xl transition-all hover:scale-110 group relative sm:w-[164px] sm:h-[246px]">
-        <div className="h-full w-full">
+        <div className="w-full h-full">
           <img
-            className="w-full h-full object-cover relative transition-all group-hover:opacity-10 z-0"
+            className="relative z-0 object-cover w-full h-full transition-all group-hover:opacity-10"
             src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
           />
-          <div className="absolute top-0 text-text-50 transition-all opacity-0 group-hover:opacity-100 w-full h-full flex items-center justify-center text-center flex-col gap-y-3">
+          <div className="absolute top-0 flex flex-col items-center justify-center w-full h-full text-center transition-all opacity-0 text-text-50 group-hover:opacity-100 gap-y-3">
             <p className="mt-2 max-w-[180px]">{movie.title}</p>
             <p>{movie.release_date}</p>
-            <div className="flex gap-x-3 mb-3">
+            <div className="flex mb-3 gap-x-3">
               <div className="bg-background-900 rounded-sm w-8 flex items-center justify-center px-3 py-[2px] flex-row">
                 <p className="text-[14px] inline-block">
                   {movie.vote_average.toFixed(1)}
@@ -26,7 +26,7 @@ const FilmCard = ({ movie }) => {
               </div>
             </div>
 
-            <button className="border-white rounded-full border-2 items-center justify-center">
+            <button className="items-center justify-center border-2 border-white rounded-full">
               <MdNavigateNext size={"30px"} />
             </button>
           </div>
