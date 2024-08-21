@@ -15,11 +15,11 @@ export async function fetchMovies({ pageParam }) {
     const res = await fetch(
       `https://api.themoviedb.org/3/search/movie?query=${searchParams.get(
         "q"
-      )}&language=en-US&page=1`,
+      )}&language=en-US&page=${pageParam}`,
       options
     );
     const data = await res.json();
-    return data.results;
+    return data;
   } else {
     const res = await fetch(apiDicoverURL, options);
     const data = await res.json();
