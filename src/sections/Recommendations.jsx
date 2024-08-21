@@ -11,7 +11,7 @@ const Recommendations = () => {
     isError,
     error,
   } = useQuery({
-    queryKey: ["rec", `${id} rec`],
+    queryKey: [`${id} rec`],
     queryFn: () => fetchRec(id),
   });
 

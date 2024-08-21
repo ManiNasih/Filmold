@@ -11,7 +11,7 @@ const Videos = () => {
     isError,
     error,
   } = useQuery({
-    queryKey: ["videos", `${id} videos`],
+    queryKey: [`${id} videos`],
     queryFn: () => fetchMovieVideos(id),
   });
 

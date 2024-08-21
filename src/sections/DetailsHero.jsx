@@ -11,7 +11,7 @@ const DetailsHero = () => {
     isError,
     error,
   } = useQuery({
-    queryKey: ["movie details", id],
+    queryKey: [`${id} hero`],
     queryFn: () => fetchMovieDetails(id),
   });
 
