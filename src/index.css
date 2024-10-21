@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-background-950 font-Rubik overflow-x-hidden text-teal-50;
+}
+
+@layer components {
+  .translateAbs {
+    transform: translate(-50, -50);
+  }
+}
