@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSearchTermStore } from "../store";
 
 const Header = () => {
-  // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
 
   const searchTerm = useSearchTermStore((state) => state.searchTerm);
@@ -36,7 +35,6 @@ const Header = () => {
           className="translateAbs absolute top-[14%] right-1 flex items-center justify-center bg-primary-900 w-[25px] h-[25px] rounded-sm"
           onClick={(e) => {
             e.preventDefault();
-            // handleSearchTermParams("q", searchTerm);
             searchTerm === "" ? navigate("/") : navigate(`/?q=${searchTerm}`);
           }}
         >
