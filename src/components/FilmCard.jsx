@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const FilmCard = ({ movie }) => {
   return (
-    <Link to={`/details/${movie.id.toString()}`} reloadDocument key={movie.id}>
+    <Link to={`/details/${movie.id.toString()}`} key={movie.id}>
       <div className="bg-primary-900 w-[219px] h-[328px] m-6 overflow-hidden border-none rounded-xl transition-all hover:scale-110 group relative sm:w-[164px] sm:h-[246px]">
         <div className="w-full h-full">
           <img
