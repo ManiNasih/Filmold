@@ -52,7 +52,7 @@ const DetailsHero = () => {
           <h1 className="font-bold text-3xl max-w-[400px] mb-10">
             {details.title}
           </h1>
-          <div className="flex flex-wrap mb-10 gap-x-2">
+          <div className="flex flex-wrap mb-10 gap-3">
             {details.genres.map((genre) => (
               <div
                 className="bg-[#a3a3a3] bg-opacity-30 rounded p-2 text-sm"
