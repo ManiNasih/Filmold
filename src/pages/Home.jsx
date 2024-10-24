@@ -52,7 +52,8 @@ export default function Home() {
 
   return (
     <div className="w-screen h-screen p-20 sm:px-6">
-      <Hero />
+      {searchParams.size === 0 ? <Hero /> : null}
+      {/* <Hero /> */}
       {movies}
       <div
         ref={ref}
